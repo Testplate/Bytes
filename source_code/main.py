@@ -22,7 +22,11 @@ def extract_bytes(file_path):
             + "\n}};"
         )
 
-        return cpp_output
+        out_file = os.path.join(os.path.dirname(file_path), "bytes.txt")
+        with open(out_file, "w", encoding="utf-8") as f:
+            f.write(cpp_output)
+
+        return f"Saved to {out_file}"
 
     except FileNotFoundError:
         return "Error: File not found."
@@ -32,5 +36,4 @@ def extract_bytes(file_path):
 
 if __name__ == "__main__":
     file_path = input("Please enter the path to your file: ")
-    output = extract_bytes(file_path)
-    print(output)
+    print(extract_bytes(file_path))
